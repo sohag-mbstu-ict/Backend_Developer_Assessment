@@ -15,17 +15,30 @@ from selenium.webdriver.chrome.options import Options
 
 from First_bot.models import Product,ProductDescription
 
-def index(request):
-#     #Product.objects.all().delete()
-#     Product.objects.create(id=2,name="hello")
-#     obj=Product.objects.all().values()
-#     print("$$$$$$$$$$$$$$$$$ : ",obj)
-#     id=Product.objects.values_list('id',flat=True)
-#     print("$$$$$$$$$$$$$$$$$ idddddddddd : ",id)
 
-#     #https://betterprogramming.pub/understanding-django-database-querysets-and-its-optimizations-1765cb9c36e5
-#     for each in Product.objects.all():
-#         print("each.name   :   ",each.name)
+def home(request):
+    return render(request,'search.html')
+
+def index(request):
+
+    if(request.method=='POST'):
+        search=request.POST["search"]
+        print("Search &&&&&&&&&&&&&&&&&&&& ",search)
+    else:
+        print("ERORRRRRRRRRRRRRRRRRRRRRRRRR")
+
+
+
+    # #Product.objects.all().delete()
+    # #Product.objects.create(id=2,name="hello")
+    # obj=Product.objects.all().values()
+    # print("$$$$$$$$$$$$$$$$$ : ",obj)
+    # id=Product.objects.values_list('id',flat=True)
+    # print("$$$$$$$$$$$$$$$$$ idddddddddd : ",id)
+
+    # #https://betterprogramming.pub/understanding-django-database-querysets-and-its-optimizations-1765cb9c36e5
+    # for each in Product.objects.all():
+    #     print("each.name   :   ",each.name)
 
 
     option=Options()
@@ -40,8 +53,23 @@ def index(request):
     driver = webdriver.Chrome(options=chrome_options)
 
     driver = webdriver.Chrome(ChromeDriverManager().install())
-    web = 'https://www.amazon.com/s?k=wireless+charger+iphone&crid=1ZF4TCRGDRXS8&sprefix=wireless+charger+iphone%2Caps%2C350&ref=nb_sb_noss_1'
+    web = 'https://www.amazon.com'
     driver.get(web)
+
+
+
+    driver.implicitly_wait(5)
+    keyword = search
+    search = driver.find_element(By.ID, 'twotabsearchtextbox')
+    search.send_keys(keyword)
+    # click search button
+    search_button = driver.find_element(By.ID, 'nav-search-submit-button')
+    search_button.click()
+
+    driver.implicitly_wait(5)
+
+
+
     #driver.maximize_window()
     name_l=[]
 
