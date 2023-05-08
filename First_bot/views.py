@@ -58,7 +58,7 @@ def index(request):
 
 
 
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(3)
     keyword = search
     search = driver.find_element(By.ID, 'twotabsearchtextbox')
     search.send_keys(keyword)
@@ -66,7 +66,7 @@ def index(request):
     search_button = driver.find_element(By.ID, 'nav-search-submit-button')
     search_button.click()
 
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(3)
 
 
 
@@ -80,7 +80,7 @@ def index(request):
     box_l=[]
 
     c=0
-    for _ in range(1,5):
+    for _ in range(1,4):
         box=driver.find_elements(By.CSS_SELECTOR,"div.a-section.a-spacing-none.puis-padding-right-small.s-title-instructions-style")
         c=c+1
         print("ccccccccccccccccccccccccccccccc : ",c)
@@ -95,6 +95,12 @@ def index(request):
         time.sleep(3)
     
     print("****************************  name_l : ",name_l,"       ",len(name_l))
+
+    Product.objects.all().delete()
+    #Product.objects.create(id=2,name="hello")
+    for i in range(0,len(name_l)):
+        Product.objects.create(id=i,name=name_l[i])
+
 
     driver.quit()
     # print("name_l : ",name_l,"         ",len(name_l))
