@@ -7,7 +7,7 @@ class Product(models.Model):
     link=models.TextField(max_length=500)
     
     def __str__(self):
-        return self.name
+        return self.link
     
 
 

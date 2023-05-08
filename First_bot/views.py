@@ -13,9 +13,82 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.chrome.options import Options
 
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse, JsonResponse
+from rest_framework.parsers import JSONParser
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from rest_framework.views import APIView
+from django.http import Http404
+
+from rest_framework.renderers import TemplateHTMLRenderer
+
+from rest_framework import generics
+from rest_framework import mixins
+from rest_framework import serializers
+
 from First_bot.models import Product,ProductDescription
+from First_bot.serializers import ProductSerializer,ProductDescriptionSerializer
+
+#################    GenericApiView based API     #################
+#https://www.django-rest-framework.org/api-guide/generic-views/
+#https://www.django-rest-framework.org/tutorial/3-class-based-views/
+class GenericApiView_Product(generics.GenericAPIView, 
+                     mixins.ListModelMixin,
+                     mixins.CreateModelMixin,
+                     mixins.UpdateModelMixin,
+                     mixins.RetrieveModelMixin,
+                     mixins.DestroyModelMixin):
+    queryset=Product.objects.all()
+    serializer_class=ProductSerializer
+    lookup_field="id"
+
+    #https://www.django-rest-framework.org/tutorial/3-class-based-views/
+    def get(self,request,id=None):
+        if id:
+            return self.retrieve(request,id)
+        else:
+            return self.list(request)
+        
+    def post(self,request):
+        return self.create(request)
+    
+    def put(self,request,id=None):
+        return self.update(request,id)
+    
+    def delete(self,request,id=id):
+        return self.destroy(request,id)
+    
+class GenericApiView_Product_Description(generics.GenericAPIView, 
+                     mixins.ListModelMixin,
+                     mixins.CreateModelMixin,
+                     mixins.UpdateModelMixin,
+                     mixins.RetrieveModelMixin,
+                     mixins.DestroyModelMixin):
+    queryset=ProductDescription.objects.all()
+    serializer_class=ProductDescriptionSerializer
+    lookup_field="id"
+
+    #https://www.django-rest-framework.org/tutorial/3-class-based-views/
+    def get(self,request,id=None):
+        if id:
+            return self.retrieve(request,id)
+        else:
+            return self.list(request)
+        
+    def post(self,request):
+        return self.create(request)
+    
+    def put(self,request,id=None):
+        return self.update(request,id)
+    
+    def delete(self,request,id=id):
+        return self.destroy(request,id)
 
 
+###########################################################
 def home(request):
     return render(request,'search.html')
 
