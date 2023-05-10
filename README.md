@@ -4,4 +4,5 @@ Django
 
 Django REST framework
 
-psycopg3
+psycopg2
+
