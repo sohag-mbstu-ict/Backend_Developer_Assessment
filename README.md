@@ -28,7 +28,7 @@ psycopg2
     driver.implicitly_wait(3)
 ```
 
-# scrape the list of products that match the search query
+# Scrape the list of products that match the search query
 
 ```bash
     last_page_num=int(driver.find_elements(By.CSS_SELECTOR,"span.s-pagination-item.s-pagination-disabled")[1].text)
@@ -48,7 +48,22 @@ psycopg2
         time.sleep(3)
 ```
 
-# scrape the list of products that match the search query
+# Store the list of products in first bot of  postgresql datbase
+
+```bash
+    count_= Product.objects.all().count()
+    for i in range(0,count_):
+        values=Product(id=i,link=link_l[i],name=name_l[i])
+        values.save()
+```
+
+# Store the list of products in postgresql datbase
+
+```bash
+  D
+```
+
+# Store the list of products in postgresql datbase
 
 ```bash
   D
