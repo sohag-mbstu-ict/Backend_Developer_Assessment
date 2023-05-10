@@ -3,11 +3,11 @@
 
 Django 
 
+selenium
+
 webdriver-manager
 
 simplejson
-
-selenium
 
 Django REST framework
 
@@ -38,5 +38,26 @@ Starting development server at http://127.0.0.1:8000/
 ```bash
   python manage.py makemigrations
   python manage.py migrate 
+```
+
+# Declaring Serializers
+import necessary things for serializer
+```bash
+from First_bot.models import Product,ProductDescription
+from rest_framework import serializers
+```
+For ProductSerializer table
+```bash
+  class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['id','link','name']
+```
+For ProductDescriptionSerializer table
+```bash
+  class ProductDescriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductDescription
+        fields = '__all__'
 ```
 
