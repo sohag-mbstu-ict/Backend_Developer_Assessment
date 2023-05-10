@@ -164,7 +164,6 @@ class GenericApiView_Product(generics.GenericAPIView,class GenericApiView_Produc
     
     def delete(self,request,id=id):
         return self.destroy(request,id)
-  D
 ```
 
 # GenericAPIView ProductDescription (second bot) table
