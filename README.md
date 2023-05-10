@@ -13,7 +13,19 @@ Django REST framework
 
 psycopg2
 
+# To automatically search for a specific product on Amazon
 
+```bash
+    web = 'https://www.amazon.com'
+    driver.get(web)
+    driver.implicitly_wait(3)
+    keyword = search
+    search = driver.find_element(By.ID, 'twotabsearchtextbox')
+    search.send_keys(keyword)
+    search_button = driver.find_element(By.ID, 'nav-search-submit-button')
+    search_button.click()
+    driver.implicitly_wait(3)
+```
 
 # Datbase Connection
 
@@ -60,4 +72,8 @@ For ProductDescriptionSerializer table
         model = ProductDescription
         fields = '__all__'
 ```
+
+
+
+
 
