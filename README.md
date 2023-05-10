@@ -1,4 +1,5 @@
 
+
 # Dependencies:
 
 Django 
@@ -27,6 +28,31 @@ psycopg2
     driver.implicitly_wait(3)
 ```
 
+# scrape the list of products that match the search query
+
+```bash
+    last_page_num=int(driver.find_elements(By.CSS_SELECTOR,"span.s-pagination-item.s-pagination-disabled")[1].text)
+    box_l=[]
+    for _ in range(1,last_page_num):
+        box=driver.find_elements(By.CSS_SELECTOR,"div.a-section.a-spacing-none.puis-padding-right-small.s-title-instructions-style")
+        c=c+1
+        for item in box:
+            name=item.find_element(By.CSS_SELECTOR,"h2 a span").text
+            link=item.find_element(By.CSS_SELECTOR,"h2 a")
+            link=link.get_attribute('href')
+            link_l.append(link)
+            name_l.append(name)
+        time.sleep(5)
+        new_page=driver.find_element(By.CSS_SELECTOR,"a.s-pagination-item.s-pagination-next.s-pagination-button.s-pagination-separator")
+        new_page.click()
+        time.sleep(3)
+```
+
+# scrape the list of products that match the search query
+
+```bash
+  D
+```
 # Datbase Connection
 
 
@@ -72,8 +98,3 @@ For ProductDescriptionSerializer table
         model = ProductDescription
         fields = '__all__'
 ```
-
-
-
-
-
