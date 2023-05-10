@@ -1,6 +1,13 @@
+
 # Dependencies:
 
 Django 
+
+webdriver-manager
+
+simplejson
+
+selenium
 
 Django REST framework
 
@@ -24,3 +31,12 @@ psycopg2
 }
 ```
 Starting development server at http://127.0.0.1:8000/
+
+
+# Propagating changes of models
+
+```bash
+  python manage.py makemigrations
+  python manage.py migrate 
+```
+
