@@ -113,11 +113,6 @@ Starting development server at http://127.0.0.1:8000/
             total_rating="Currently unavailable"
 ```
 
-# Store the list of products in postgresql datbase
-
-```bash
-  D
-```
 
 
 # Declaring Serializers
@@ -139,4 +134,62 @@ For ProductDescriptionSerializer table
     class Meta:
         model = ProductDescription
         fields = '__all__'
+```
+
+# GenericAPIView Product (first bot) table
+```bash
+from First_bot.models import Product,ProductDescription
+from First_bot.serializers import ProductSerializer,ProductDescriptionSerializer
+
+class GenericApiView_Product(generics.GenericAPIView,class GenericApiView_Product(generics.GenericAPIView, 
+                     mixins.ListModelMixin,
+                     mixins.CreateModelMixin,
+                     mixins.UpdateModelMixin,
+                     mixins.RetrieveModelMixin,
+                     mixins.DestroyModelMixin):
+    queryset=Product.objects.all()
+    serializer_class=ProductSerializer
+    lookup_field="id"
+    def get(self,request,id=None):
+        if id:
+            return self.retrieve(request,id)
+        else:
+            return self.list(request)
+        
+    def post(self,request):
+        return self.create(request)
+    
+    def put(self,request,id=None):
+        return self.update(request,id)
+    
+    def delete(self,request,id=id):
+        return self.destroy(request,id)
+  D
+```
+
+# GenericAPIView ProductDescription (second bot) table
+```bash
+  class GenericApiView_Product_Description(generics.GenericAPIView, 
+                     mixins.ListModelMixin,
+                     mixins.CreateModelMixin,
+                     mixins.UpdateModelMixin,
+                     mixins.RetrieveModelMixin,
+                     mixins.DestroyModelMixin):
+    queryset=ProductDescription.objects.all()
+    serializer_class=ProductDescriptionSerializer
+    lookup_field="id"
+    def get(self,request,id=None):
+        if id:
+            return self.retrieve(request,id)
+        else:
+            return self.list(request)
+        
+    def post(self,request):
+        return self.create(request)
+    
+    def put(self,request,id=None):
+        return self.update(request,id)
+    
+    def delete(self,request,id=id):
+        return self.destroy(request,id)
 ```
