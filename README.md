@@ -74,7 +74,7 @@ Starting development server at http://127.0.0.1:8000/
         time.sleep(3)
 ```
 
-# Store the list of products in first bot of  postgresql datbase
+# Store the list in the Product (first bot) table of  postgresql datbase
 
 ```bash
     count_= Product.objects.all().count()
@@ -83,10 +83,34 @@ Starting development server at http://127.0.0.1:8000/
         values.save()
 ```
 
-# Store the list of products in postgresql datbase
+# Store the list in the ProductDescription (second bot) table of postgresql datbase
 
 ```bash
-  D
+    for each in Product.objects.all():
+        web=each.link
+        driver.get(web)
+        time.sleep(5)
+        try:
+            if(driver.find_element(By.XPATH,'//*[@id="productTitle"]')):
+                name=driver.find_element(By.XPATH,'//*[@id="productTitle"]').text
+        except:
+            name="Currently unavailable"
+        try:
+            if(driver.find_element(By.XPATH,'//*[@id="availability"]/span')):
+                availability=driver.find_element(By.XPATH,'//*[@id="availability"]/span').text
+        except:
+            availability="Currently unavailable"
+        
+        try:
+            if(driver.find_element(By.XPATH,'//*[@id="acrPopover"]/span[1]/a/span')):
+                rating=float(driver.find_element(By.XPATH,'//*[@id="acrPopover"]/span[1]/a/span').text)
+        except:
+            rating=0
+        try:
+            if(driver.find_element(By.XPATH,'//*[@id="acrCustomerReviewText"]')):
+                total_rating=driver.find_element(By.XPATH,'//*[@id="acrCustomerReviewText"]').text
+        except:
+            total_rating="Currently unavailable"
 ```
 
 # Store the list of products in postgresql datbase
