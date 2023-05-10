@@ -1,6 +1,6 @@
 
 # Deployment to pythonanywhere
-I have deployed this app to pythonanywhere free server. The link is : ProductDetails.pythonanywhere.com
+I have deployed this app to pythonanywhere free server. The link is : https://productdetails.pythonanywhere.com/
 # Dependencies:
 
 Django 
