@@ -128,7 +128,7 @@ psycopg2
 
 
 
-# Declaring Serializers
+# Declaring Model Serializers
 import necessary things for serializer
 ```bash
 from First_bot.models import Product,ProductDescription
