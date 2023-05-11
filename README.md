@@ -208,3 +208,20 @@ class GenericApiView_Product(generics.GenericAPIView,class GenericApiView_Produc
 # Display all Product Details
 
 ![](https://github.com/sohag-mbstu-ict/Backend_Developer_Assessment/blob/main/Screenshot/HTML.PNG)
+
+# Display all data from Product (First bot) table
+
+![](https://github.com/sohag-mbstu-ict/Backend_Developer_Assessment/blob/main/Screenshot/generic_product.PNG)
+
+# Display single data from Product (First bot) table
+
+![](https://github.com/sohag-mbstu-ict/Backend_Developer_Assessment/blob/main/Screenshot/generic_product_3.PNG)
+
+# Display all data from ProductDescription (second bot) table
+
+![](https://github.com/sohag-mbstu-ict/Backend_Developer_Assessment/blob/main/Screenshot/generic_description.PNG)
+
+# Display single data from ProductDescription (second bot) table
+
+![](https://github.com/sohag-mbstu-ict/Backend_Developer_Assessment/blob/main/Screenshot/generic_description_3.PNG)
+
