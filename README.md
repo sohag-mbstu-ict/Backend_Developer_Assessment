@@ -15,6 +15,19 @@ Django REST framework
 
 psycopg2
 
+# Set up for Selenium Webdriver Running on Chrome Browser
+
+    option=Options()
+    option.add_argument("enable-automation")
+    option.add_argument("--headless")
+    option.add_argument("--window-size=1920,1080")
+    option.add_argument("--no-sandbox")
+    option.add_argument("--disable-extensions")
+    option.add_argument("--dns-prefetch-disable")
+    option.add_argument("--disable-gpu")
+    option.page_load_strategy = 'normal'
+    driver = webdriver.Chrome(options=option)
+
 # Datbase Connection
 
 
