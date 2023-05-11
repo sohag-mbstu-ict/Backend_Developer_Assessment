@@ -204,3 +204,5 @@ class GenericApiView_Product(generics.GenericAPIView,class GenericApiView_Produc
     def delete(self,request,id=id):
         return self.destroy(request,id)
 ```
+
+![Display all Product Detail](https://github.com/sohag-mbstu-ict/Backend_Developer_Assessment/blob/main/Screenshot/HTML.PNG)
