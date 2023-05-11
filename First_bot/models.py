@@ -37,13 +37,13 @@ class ProductDescription(models.Model):
 
     compatible_models=models.TextField(max_length=700,blank=True, null=True)
 
-    special_features=models.TextField(max_length=300,blank=True, null=True)
+    # special_features=models.TextField(max_length=300,blank=True, null=True)
 
-    color=models.CharField(max_length=30,blank=True, null=True)
+    # color=models.CharField(max_length=30,blank=True, null=True)
 
-    input_voltage=models.CharField(max_length=75,blank=True, null=True)
+    # input_voltage=models.CharField(max_length=75,blank=True, null=True)
 
-    mounting_type=models.CharField(max_length=50,blank=True, null=True)
+    # mounting_type=models.CharField(max_length=50,blank=True, null=True)
 
     #https://stackoverflow.com/questions/1110153/what-is-the-most-efficient-way-to-store-a-list-in-the-django-models
     img=models.TextField(max_length=3000,null=True)

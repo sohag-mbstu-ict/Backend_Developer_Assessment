@@ -42,20 +42,59 @@ form.example::after {
   clear: both;
   display: table;
 }
+
 </style>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+<h3 style="text-align: center;">Unfortunately selenium webdriver does not work on free pythonanywhere Account</h3>
 
-<h2>Search Button</h2>
-
-
-<p>Centered inside a form with max-width:</p>
 <form class="example" action="/index" style="margin:auto;max-width:300px" method="POST">
     {% csrf_token %}
     <label for="search" class="form-label"></label>
   <input type="text" placeholder="Search.." name="search">
   <button type="submit"><i class="fa fa-search"></i></button>
 </form>
+
+<br>
+<h3 style="text-align: center; color:#0b7dda";>Display data from Product (First bot) table in <p style="color:green">Generic Api View format</p></h3>
+<br>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="http://127.0.0.1:8000/generic_product/">All data from Product table (First bot) </a>
+      <a class="navbar-brand" href="http://127.0.0.1:8000/generic_product/"></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="http://127.0.0.1:8000/generic_product/1/">First Product</a></li>
+      <li class="active"><a href="http://127.0.0.1:8000/generic_product/2/">Second Product</a></li>
+      <li class="active"><a href="http://127.0.0.1:8000/generic_product/3/">Third Product</a></li>
+      <li class="active"><a href="http://127.0.0.1:8000/generic_product/4/">Fourth Product</a></li>
+      <li class="active"><a href="http://127.0.0.1:8000/generic_product/5/">Fifth Product</a></li>
+  </div>
+</nav>
+  <br>
+  <br>
+
+<h3 style="text-align: center; color:#0b7dda";>Display data from ProductDescription (Second bot) table in <p style="color:green">Generic Api View format</p></h3>
+<br>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="http://127.0.0.1:8000/generic_description/">All data from ProductDescription table (Second bot) </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="http://127.0.0.1:8000/generic_description/1/">First Product</a></li>
+      <li class="active"><a href="http://127.0.0.1:8000/generic_description/2/">Second Product</a></li>
+      <li class="active"><a href="http://127.0.0.1:8000/generic_description/3/">Third Product</a></li>
+      <li class="active"><a href="http://127.0.0.1:8000/generic_description/4/">Fourth Product</a></li>
+      <li class="active"><a href="http://127.0.0.1:8000/generic_description/5/">Fifth Product</a></li>
+  </div>
+</nav>
 
 </body>
 </html> 

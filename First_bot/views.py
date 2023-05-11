@@ -32,6 +32,7 @@ import simplejson as json
 
 from First_bot.models import Product,ProductDescription
 from First_bot.serializers import ProductSerializer,ProductDescriptionSerializer
+from django.template import loader
 
 #################    GenericApiView based API     #################
 #https://www.django-rest-framework.org/api-guide/generic-views/
@@ -90,8 +91,16 @@ class GenericApiView_Product_Description(generics.GenericAPIView,
 
 
 ###########################################################
+
 def home(request):
+    # mydata = ProductDescription.objects.all().values()
+    # template = loader.get_template('display.html')
+    # context = {
+    #     'mymembers': mydata,
+    # }
+    # return HttpResponse(template.render(context, request))
     return render(request,'search.html')
+    
 
 def index(request):
     #Product.objects.all().delete()
@@ -102,20 +111,7 @@ def index(request):
     else:
         print("ERORRRRRRRRRRRRRRRRRRRRRRRRR")
 
-
-
-    
-
-
     option=Options()
-    # option.headless=True
-    # option.add_argument("window-size=1600x900")
-
-
-
-    # chrome_options = webdriver.ChromeOptions()
-    # chrome_options.add_argument("--headless")
-    # chrome_options.add_argument("--disable-gpu")
     option.add_argument("enable-automation")
     option.add_argument("--headless")
     option.add_argument("--window-size=1920,1080")
@@ -125,16 +121,12 @@ def index(request):
     option.add_argument("--disable-gpu")
     option.page_load_strategy = 'normal'
     driver = webdriver.Chrome(options=option)
-
-    driver = webdriver.Chrome(ChromeDriverManager().install())
-
-    
     web = 'https://www.amazon.com'
     driver.get(web)
+    #driver = webdriver.Chrome(ChromeDriverManager().install())
 
 
-
-    driver.implicitly_wait(3)
+    driver.implicitly_wait(2)
     keyword = search
     search = driver.find_element(By.ID, 'twotabsearchtextbox')
     search.send_keys(keyword)
@@ -142,7 +134,7 @@ def index(request):
     search_button = driver.find_element(By.ID, 'nav-search-submit-button')
     search_button.click()
 
-    driver.implicitly_wait(3)
+    driver.implicitly_wait(2)
 
 
 
@@ -157,30 +149,30 @@ def index(request):
     box_l=[]
 
     c=0
-    for _ in range(1,10):
-        box=driver.find_elements(By.CSS_SELECTOR,"div.a-section.a-spacing-none.puis-padding-right-small.s-title-instructions-style")
-        c=c+1
-        print("ccccccccccccccccccccccccccccccc : ",c)
-        for item in box:
-            name=item.find_element(By.CSS_SELECTOR,"h2 a span").text
-            #print("NNNNNNNNNNNNNNNNNNNNNNNNNNNName : ",name,"   ",c)
-            link=item.find_element(By.CSS_SELECTOR,"h2 a")
-            #https://stackoverflow.com/questions/36476861/selenium-webelement-object-has-no-attribute-get-attribute
-            link=link.get_attribute('href')
-            # print("  Linkkkkkkkkkkkkk : ",link)
+    
+    box=driver.find_elements(By.CSS_SELECTOR,"div.a-section.a-spacing-none.puis-padding-right-small.s-title-instructions-style")
+    c=c+1
+    print("ccccccccccccccccccccccccccccccc : ",c)
+    for item in box:
+        name=item.find_element(By.CSS_SELECTOR,"h2 a span").text
+        #print("NNNNNNNNNNNNNNNNNNNNNNNNNNNName : ",name,"   ",c)
+        link=item.find_element(By.CSS_SELECTOR,"h2 a")
+        #https://stackoverflow.com/questions/36476861/selenium-webelement-object-has-no-attribute-get-attribute
+        link=link.get_attribute('href')
+        # print("  Linkkkkkkkkkkkkk : ",link)
             
-            link_l.append(link)
-            name_l.append(name)
-        time.sleep(5)
-        new_page=driver.find_element(By.CSS_SELECTOR,"a.s-pagination-item.s-pagination-next.s-pagination-button.s-pagination-separator")
-        new_page.click()
-        time.sleep(3)
+        link_l.append(link)
+        name_l.append(name)
+    #time.sleep(5)
+    # new_page=driver.find_element(By.CSS_SELECTOR,"a.s-pagination-item.s-pagination-next.s-pagination-button.s-pagination-separator")
+    # new_page.click()
+    # time.sleep(3)
     
     #print("****************************  name_l : ",link_l,"       ",len(link_l))
 
-    #Product.objects.all().delete()
+    Product.objects.all().delete()
     #Product.objects.create(id=2,name="hello")
-    for i in range(0,len(link_l)):
+    for i in range(0,6):
         #Product.objects.create(id=i,link=link_l[i],name=name_l[i])
         values=Product(id=i,link=link_l[i],name=name_l[i])
         values.save()
@@ -204,7 +196,7 @@ def index(request):
     ProductDescription.objects.all().delete()
     for each in Product.objects.all():
         c=c+1
-        if(c>=count):
+        if(c>5):
             break
         #print("each.link   :   ",each.link)
         idd=each.id
@@ -313,29 +305,29 @@ def index(request):
         except:
             compatible_models="Currently unavailable"
 
-        try:
-            if(driver.find_element(By.XPATH,'//*[@id="poExpander"]/div[1]/div/table/tbody/tr[7]/td[2]/span')):
-                special_features=driver.find_element(By.XPATH,'//*[@id="poExpander"]/div[1]/div/table/tbody/tr[7]/td[2]/span').text
-        except:
-            special_features="Currently unavailable"
+        # try:
+        #     if(driver.find_element(By.XPATH,'//*[@id="poExpander"]/div[1]/div/table/tbody/tr[7]/td[2]/span')):
+        #         special_features=driver.find_element(By.XPATH,'//*[@id="poExpander"]/div[1]/div/table/tbody/tr[7]/td[2]/span').text
+        # except:
+        #     special_features="Currently unavailable"
 
-        try:
-            if(driver.find_element(By.XPATH,'//*[@id="poExpander"]/div[1]/div/table/tbody/tr[8]/td[2]/span')):
-                color=driver.find_element(By.XPATH,'//*[@id="poExpander"]/div[1]/div/table/tbody/tr[8]/td[2]/span').text
-        except:
-            color="Currently unavailable"
+        # try:
+        #     if(driver.find_element(By.XPATH,'//*[@id="poExpander"]/div[1]/div/table/tbody/tr[8]/td[2]/span')):
+        #         color=driver.find_element(By.XPATH,'//*[@id="poExpander"]/div[1]/div/table/tbody/tr[8]/td[2]/span').text
+        # except:
+        #     color="Currently unavailable"
 
-        try:
-            if(driver.find_element(By.XPATH,'//*[@id="poExpander"]/div[1]/div/table/tbody/tr[9]/td[2]/span')):
-                input_voltage=driver.find_element(By.XPATH,'//*[@id="poExpander"]/div[1]/div/table/tbody/tr[9]/td[2]/span').text
-        except:
-            input_voltage="Currently unavailable"
+        # try:
+        #     if(driver.find_element(By.XPATH,'//*[@id="poExpander"]/div[1]/div/table/tbody/tr[9]/td[2]/span')):
+        #         input_voltage=driver.find_element(By.XPATH,'//*[@id="poExpander"]/div[1]/div/table/tbody/tr[9]/td[2]/span').text
+        # except:
+        #     input_voltage="Currently unavailable"
 
-        try:
-            if(driver.find_element(By.XPATH,'//*[@id="poExpander"]/div[1]/div/table/tbody/tr[10]/td[2]/span')):
-                mounting_type=driver.find_element(By.XPATH,'//*[@id="poExpander"]/div[1]/div/table/tbody/tr[10]/td[2]/span').text
-        except:
-            mounting_type="Currently unavailable"
+        # try:
+        #     if(driver.find_element(By.XPATH,'//*[@id="poExpander"]/div[1]/div/table/tbody/tr[10]/td[2]/span')):
+        #         mounting_type=driver.find_element(By.XPATH,'//*[@id="poExpander"]/div[1]/div/table/tbody/tr[10]/td[2]/span').text
+        # except:
+        #     mounting_type="Currently unavailable"
 
         try:
             if(driver.find_element(By.XPATH,'//*[@id="feature-bullets"]/ul')):
@@ -360,13 +352,16 @@ def index(request):
                     total_rating=total_rating,price=price,shipping_import_details=shipping_import_details,
                     delivery=delivery,brand=brand,about_this_item=about_this_item,img=json.dumps(img_l),
                     connectivity_technology=connectivity_technology,connector_type=connector_type,
-                    compatible_device=compatible_device,compatible_models=compatible_models,color=color,
-                    special_features=special_features,input_voltage=input_voltage,
-                    mounting_type=mounting_type)
+                    compatible_device=compatible_device,compatible_models=compatible_models)
         values_.save()
 
-        #print("1111111111nameeeeeeeee name : ",rating)
+        print("1111111111nameeeeeeeee name : ",rating)
         #break
     driver.quit()
 
-    return HttpResponse("Hello, world. You're at the polls index.")
+    mydata = ProductDescription.objects.all().values()
+    template = loader.get_template('display.html')
+    context = {
+        'mymembers': mydata,
+    }
+    return HttpResponse(template.render(context, request))
