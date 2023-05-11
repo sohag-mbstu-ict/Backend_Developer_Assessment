@@ -1,6 +1,7 @@
 
+
 # Deployment to pythonanywhere
-I have deployed this app to pythonanywhere free server. The link is : https://productdetails.pythonanywhere.com/
+I have deployed this app to pythonanywhere free server. Unfortunately selenium webdriver does not work on free pythonanywhere server.But It works successfully on my local pc. The link is : https://productdetails.pythonanywhere.com/
 # Dependencies:
 
 Django 
